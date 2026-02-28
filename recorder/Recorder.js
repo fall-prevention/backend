@@ -97,25 +97,34 @@ export class Recorder {
                 ? ["-f", "dshow", "-video_size", size, "-framerate", String(this.fps), "-i", this.devicePath]
                 : ["-f", "v4l2", "-framerate", String(this.fps), "-video_size", size, "-i", this.devicePath];
 
+        // 코덱 옵션을 OS별로 분기 (윈도우=CPU, 리눅스/코랄=HW)
+        const codecArgs =
+            process.platform === "win32"
+                ? [
+                    "-c:v", "libx264",
+                    "-preset", "veryfast",
+                    "-tune", "zerolatency",
+                    "-pix_fmt", "yuv420p",
+                ]
+                : [
+                    "-c:v", "h264_v4l2m2m",
+                ];
+
         const args = [
             "-hide_banner",
             "-loglevel", "warning",
             ...inputArgs,
 
-            "-c:v", "libx264",
-            "-preset", "veryfast",
-            "-tune", "zerolatency",
+            ...codecArgs,
+
             "-g", String(this.fps * 2),
             "-keyint_min", String(this.fps * 2),
             "-sc_threshold", "0",
-            "-pix_fmt", "yuv420p",
 
             "-f", "segment",
             "-segment_time", "2",
             "-reset_timestamps", "1",
-
             ...(process.platform === "win32" ? [] : ["-strftime", "1"]),
-
             outPattern,
         ];
 
