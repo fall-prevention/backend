@@ -6,7 +6,10 @@
 
 AI 기반 낙상 감지 시스템은 카메라 영상을 실시간으로 분석하여 이벤트를 생성하고,
 낙상 발생 시 Mobius에 데이터를 저장하며 웹 애플리케이션으로 실시간 이벤트를 전달합니다.
-<img width="1026" height="472" alt="image" src="https://github.com/user-attachments/assets/8c5896cf-892c-4c17-ad4b-0529ed12bbb4" />
+
+
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/b3f24623-e8b0-4322-914b-fc541566a6c0" />
+
 # 데이터 흐름 (Data Flow)
 ```
 Camera
