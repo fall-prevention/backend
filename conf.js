@@ -68,7 +68,7 @@ cnt_arr = [
     },
 ];
 
-exports.clip = {
+conf.clip = {
     host: "192.168.0.2",
     port: 8081
 };
